@@ -1,0 +1,36 @@
+<div class="container">
+  <a [routerLink]="['/product-new']"><button type="button" class="btn btn-primary mb-3">New product</button></a> 
+  <div *ngIf="products?.length === 0">
+    <p>No products yet... click on new product to add one!</p>
+  </div>  
+  <table class="table" *ngIf="products?.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Age</th>
+        <th scope="col">Company</th>
+        <th scope="col">Price</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let product of products">
+      <tr>
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.ageRestriction}}</td>
+        <td>{{product.company}}</td>
+        <td>{{product.price}}</td>
+        <td>  
+          <a [routerLink]="['/product-edit', product.id]">
+            <button class="btn"><i class="fa fa-edit"></i> </button>          
+          </a>            
+          <button class="btn" (click)="deleteProduct(product.id)"><i class="fa fa-trash-o"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

@@ -1,0 +1,63 @@
+<div class="productFormContainer">
+  <form [formGroup]="productForm" (ngSubmit)="createProduct()">
+    <h2 class="text-center text-primary">New Product</h2>
+    <hr>  
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text"         
+        class="form-control"  
+        formControlName="name"         
+        placeholder="Name">
+      <div class="text-danger" *ngIf="productForm.get('name').touched && productForm.get('name').hasError('required')">Please write a name</div>
+      <div class="text-danger" *ngIf="productForm.get('name').touched && productForm.get('name').hasError('maxlength')">Name should be max 50 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="number" 
+          class="form-control" 
+          formControlName="price" 
+          >
+      </div>
+      <div class="text-danger" *ngIf="productForm.get('price').touched && productForm.get('price').hasError('required')">Please write a price</div>
+      <div class="text-danger" *ngIf="productForm.get('price').touched && productForm.get('price').hasError('range')">Price should be between $1 and $1000</div>
+    </div>
+
+    <div class="form-group">
+      <label for="company">Company</label>
+      <input type="text"         
+        class="form-control"  
+        formControlName="company"         
+        placeholder="Company">
+      <div class="text-danger" *ngIf="productForm.get('company').touched && productForm.get('company').hasError('required')">Please write a Company</div>
+      <div class="text-danger" *ngIf="productForm.get('company').touched && productForm.get('company').hasError('maxlength')">Company name should be max 50 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label for="ageRestriction">Maximum age</label>
+      <input type="number" 
+        formControlName="ageRestriction" 
+        class="form-control"   
+        placeholder="Maximum age"        
+        min="1" max="100">
+      <div class="text-danger" *ngIf="productForm.get('ageRestriction').touched && productForm.get('ageRestriction').hasError('range')">Maximum age should be a value between 0 and 100</div>      
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text"         
+        class="form-control"  
+        formControlName="description"         
+        placeholder="Description">
+      <div class="text-danger" *ngIf="productForm.get('description').touched && productForm.get('description').hasError('maxlength')">Description should be max 100 characters</div>
+    </div>
+    
+    <button class="btn btn-success" [disabled]="!productForm.valid" type="submit">Create product</button>
+
+  </form>
+</div>

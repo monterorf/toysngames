@@ -1,0 +1,64 @@
+<div class="editProductFormContainer">
+  <form [formGroup]="editProductForm" (ngSubmit)="editProduct(product)">
+    <h2 class="text-center text-primary">Edit Product</h2>
+    <hr>  
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text"         
+        class="form-control"  
+        formControlName="name"         
+        [(ngModel)]="product.name">
+      <div class="text-danger" *ngIf="editProductForm.get('name').touched && editProductForm.get('name').hasError('required')">Please write a name</div>
+      <div class="text-danger" *ngIf="editProductForm.get('name').touched && editProductForm.get('name').hasError('maxlength')">Name should be max 50 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="number" 
+          class="form-control" 
+          formControlName="price" 
+          [(ngModel)]="product.price">
+          >
+      </div>
+      <div class="text-danger" *ngIf="editProductForm.get('price').touched && editProductForm.get('price').hasError('required')">Please write a price</div>
+      <div class="text-danger" *ngIf="editProductForm.get('price').touched && editProductForm.get('price').hasError('range')">Price should be between $1 and $1000</div>
+    </div>
+
+    <div class="form-group">
+      <label for="company">Company</label>
+      <input type="text"         
+        class="form-control"  
+        formControlName="company"         
+        [(ngModel)]="product.company">
+      <div class="text-danger" *ngIf="editProductForm.get('company').touched && editProductForm.get('company').hasError('required')">Please write a Company</div>
+      <div class="text-danger" *ngIf="editProductForm.get('company').touched && editProductForm.get('company').hasError('maxlength')">Company name should be max 50 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label for="ageRestriction">Maximum age</label>
+      <input type="number" 
+        formControlName="ageRestriction" 
+        class="form-control"   
+        [(ngModel)]="product.ageRestriction"        
+        min="1" max="100">
+      <div class="text-danger" *ngIf="editProductForm.get('ageRestriction').touched && editProductForm.get('ageRestriction').hasError('range')">Maximum age should be a value between 0 and 100</div>      
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text"         
+        class="form-control"  
+        formControlName="description"         
+        [(ngModel)]="product.description">
+      <div class="text-danger" *ngIf="editProductForm.get('description').touched && editProductForm.get('description').hasError('maxlength')">Description should be max 100 characters</div>
+    </div>
+    
+    <button class="btn btn-success" [disabled]="!editProductForm.valid" type="submit">Edit product</button>
+
+  </form>
+</div>
